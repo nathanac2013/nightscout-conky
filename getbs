@@ -42,8 +42,8 @@ if [ "$tr" != "3" ];
 then 
 if [ "$tr" != "4" ]; 
 then 
-rm -rf /home/nathan/src/current*;
-wget https://coffeyb.herokuapp.com/api/v1/entries.json -qO ~/src/current.json;
+rm -rf ~/src/current*;
+wget https://<username>.herokuapp.com/api/v1/entries.json -qO ~/src/current.json;
 fi
 fi
 fi
