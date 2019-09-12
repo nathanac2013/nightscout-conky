@@ -1,0 +1,65 @@
+background no
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+imlib_cache_size 0
+update_interval 1
+cpu_avg_samples 1
+format_human_readable
+
+alignment top_right
+gap_x 0
+gap_y 0
+minimum_size 240 1080
+maximum_width 240
+
+own_window yes
+own_window_type normal	# options are: normal/override/dock/desktop/panel
+own_window_class Conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_colour 333333
+own_window_argb_visual no
+own_window_argb_value 0
+
+border_inner_margin 0
+border_outer_margin 0
+
+default_bar_size 100 6
+draw_shades no
+default_shade_color 000000
+draw_outline no
+default_outline_color 000000
+draw_borders no
+draw_graph_borders yes
+default_graph_size 40,220
+show_graph_scale no
+show_graph_range no
+
+override_utf8_locale yes
+use_xft yes
+xftfont Adele:size=13,weight:normal
+xftalpha 1
+uppercase no
+max_text_width 40
+
+default_color ffffff
+color1 ffffff
+color2 8B0000
+color3 81CAE0
+color4 FF5A45
+color5 ffff00
+color6 CCCC00
+color7 006600
+
+TEXT
+${voffset 10}${goto 10}SSID: ${wireless_essid wlo1}
+${goto 10}Signal:${goto 70}${color2}${wireless_link_bar wlo1}${color1}${alignr 10}${wireless_link_qual_perc wlo1}%
+${goto 10}IP: ${alignr 10}${addr wlo1}}
+
+
+###### nightscout stuffs
+${goto 10}Current BS:${color7}${if_match ${execi 1 getbs -v a}>=140}${color6}${else}${if_match ${execi 1 getbs -v a}<=70}${color5}${endif}${endif}
+${font LCDMono:bold:size=40}${execi 1 getbs -v a}${color1}
+${font LCDMono:bold:size=10}${execi 1 getbs -d a}
+${goto 10}recieved: ${execi 1 getbs -t a} mins ago ${execi 1 getbs -r a}

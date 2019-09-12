@@ -1,0 +1,70 @@
+#!/bin/bash
+##########################
+#####set variable#########
+##########################
+cd /home/nathan/src/;
+tr=$(expr $(date +%M) - $(date -d $(jshon -e 0 -e dateString -u < /home/nathan/src/current.json) +%M););
+lr=$(jshon -e 0 -e device < /home/nathan/src/current.json | cut -c 2) 
+direction=$(jshon -e 0 -e direction < /home/nathan/src/current.json)
+
+if [ "$lr" = "x" ]; then 
+fr=$(jshon -e 0 -e sgv < /home/nathan/src/current.json); 
+fi
+if [ "$lr" != "x" ]; 
+then 
+fr=$(jshon -e 0 -e mbg < /home/nathan/src/current.json); 
+fi
+
+
+lr2=$(jshon -e 1 -e device < /home/nathan/src/current.json | cut -c 2) 
+if [ "$lr2" = "x" ]; then 
+sr=$(jshon -e 1 -e sgv < /home/nathan/src/current.json); 
+fi
+if [ "$lr2" != "x" ]; 
+then 
+sr=$(jshon -e 1 -e mbg < current.json); 
+fi
+
+delta=$(expr $fr - $sr)" || "$direction
+##############################
+##############################
+####refresh if needed#########
+##############################
+##############################
+
+if [ "$tr" != "0" ]; 
+then 
+if [ "$tr" != "1" ]; 
+then 
+if [ "$tr" != "2" ]; 
+then 
+if [ "$tr" != "3" ]; 
+then 
+if [ "$tr" != "4" ]; 
+then 
+rm -rf /home/nathan/src/current*;
+wget https://coffeyb.herokuapp.com/api/v1/entries.json -qO /home/nathan/src/current.json;
+fi
+fi
+fi
+fi
+fi
+###################################
+########     main   ###############
+###################################
+while getopts v:d:h:r:t option
+do
+case "${option}"
+in
+v) echo $fr;;
+d) echo "Delta: "$delta;;
+h) echo "-r for time recieved";echo "-v for blood sugar ";echo "-d for delta";echo "-t minutes sine last record";;
+r) date -d $(jshon -e 0 -e dateString -u < /home/nathan/src/current.json) +%I:%M;;
+t) expr $(date +%M) - $(date -d $(jshon -e 0 -e dateString -u < /home/nathan/src/current.json) +%M);;
+esac
+done
+
+##############################
+########### cleanup ##########
+##############################
+rm -rf ./wget*

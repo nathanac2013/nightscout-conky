@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo cp ./getbs /usr/bin/getbs
+sudo cp ./conky.rc ~/.conkyrc
