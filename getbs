@@ -2,7 +2,7 @@
 ##########################
 #####set variable#########
 ##########################
-cd /home/nathan/src/;
+cd ~/src/;
 tr=$(expr $(date +%M) - $(date -d $(jshon -e 0 -e dateString -u < ~/src/current.json) +%M););
 lr=$(jshon -e 0 -e device < ~/src/current.json | cut -c 2) 
 direction=$(jshon -e 0 -e direction < ~/src/current.json)
