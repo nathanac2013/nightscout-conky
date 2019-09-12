@@ -4,3 +4,4 @@ to install simply
 sudo cp ./getbs /usr/bin/bash
 
 and start the conky , enjoy
+also mkdir ~/src (where it downloads and motitors the bs)
