@@ -63,17 +63,18 @@ fi
 ###################################
 ########     main   ###############
 ###################################
-while getopts v:d:h:r:t option
+while getopts v:d:h:r:t:q option
 do
 case "${option}"
 in
 v) echo $fr;;
 d) echo "Delta: "$delta;;
 h) echo "-r for time recieved";echo "-v for blood sugar ";echo "-d for delta";echo "-t minutes sine last record";;
-r) date -d $(jshon -e 0 -e dateString -u < ~/src/current.json) +%I:%M;;
-t) expr $(date +%M) - $(date -d $(jshon -e 0 -e dateString -u < ~/src/current.json) +%M);;
+r) date -d $(jshon -e 0 -e dateString -u < /home/nathan/src/current.json) +%I:%M;;
+t) echo $tr;;
 esac
 done
+
 
 ##############################
 ########### cleanup ##########
