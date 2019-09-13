@@ -6,6 +6,17 @@ cd ~/src/;
 tr=$(expr $(date +%M) - $(date -d $(jshon -e 0 -e dateString -u < ~/src/current.json) +%M););
 lr=$(jshon -e 0 -e device < ~/src/current.json | cut -c 2) 
 direction=$(jshon -e 0 -e direction < ~/src/current.json)
+#####################################
+########fix bug in time##############
+#####################################
+#####  if in the last 5 mins of the hour itll return a negative number cuz i didnt account for the hour change , thats what this does
+if [ $tr \< 0 ]; then
+ tr=$(expr 60 + $tr)
+fi
+######################################
+#######end bug fix ###################
+######################################
+
 
 if [ "$lr" = "x" ]; then 
 fr=$(jshon -e 0 -e sgv < ~/src/current.json); 
